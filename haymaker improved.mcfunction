@@ -8,7 +8,7 @@ execute as @a[scores={haymakertimer=2}] run replaceitem entity @s hotbar.6 minec
 execute as @a[scores={haymakertimer=2}] run effect give @s speed 1 3
 execute as @a[scores={haymakertimer=8}] run replaceitem entity @s hotbar.6 air 
 
-//COOLDOWN TIMER//
+#COOLDOWN TIMER
 title @a[nbt={SelectedItemSlot:6},scores={haymakertimer=10}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"text":"60","color":"gold","bold":"true"}]
 title @a[nbt={SelectedItemSlot:6},scores={haymakertimer=30}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"text":"59","color":"gold","bold":"true"}]
 title @a[nbt={SelectedItemSlot:6},scores={haymakertimer=50}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"text":"58","color":"gold","bold":"true"}]
