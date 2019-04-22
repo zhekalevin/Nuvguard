@@ -1,3 +1,9 @@
+#Reset and stop cycle after completion
+execute as @a[scores={templateTimer=0,templateCycle=1..}] run scoreboard players set @s templateCycle 0
+
+#Start timer
+scoreboard players add @a[scores={templateTimer=1..}] templateTimer 1
+
 #Set cooldown duration in seconds — CdUI (Cooldown UI)
 scoreboard players set @a[scores={templateTimer=2}] templateCdUI 60
 
@@ -5,12 +11,6 @@ scoreboard players set @a[scores={templateTimer=2}] templateCdUI 60
 execute as @a[scores={templateTimer=2..}] run scoreboard players operation @s templateTimerEnd = @s templateCdUI
 scoreboard players set @a[scores={templateTimer=2}] perSec 20
 execute as @a[scores={templateTimer=2..}] run scoreboard players operation @s templateTimerEnd *= @s perSec
-
-#Reset and stop cycle after completion
-execute as @a[scores={templateTimer=0,templateCycle=1..}] run scoreboard players set @s templateCycle 0
-
-#Start timer
-scoreboard players add @a[scores={templateTimer=1..}] templateTimer 1
 
 #Choose one: replace "scoreboard players set @s doSomething 0" with real command
 #Do something every tick of each second
