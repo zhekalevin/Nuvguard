@@ -9,7 +9,6 @@ scoreboard players set @a[scores={templateTimer=2}] templateCdUI 60
 
 #Calculate and set timer ending time, based on cooldown
 execute as @a[scores={templateTimer=2..}] run scoreboard players operation @s templateTimerEnd = @s templateCdUI
-scoreboard players set @a[scores={templateTimer=2}] perSec 20
 execute as @a[scores={templateTimer=2..}] run scoreboard players operation @s templateTimerEnd *= @s perSec
 
 #Choose one: replace "scoreboard players set @s doSomething 0" with real command
