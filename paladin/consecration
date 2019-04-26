@@ -1,32 +1,44 @@
-#Replace: paladin, consecration, purpleDrop, 5, 6, Consecration, dark_purple, purple_dye
-#         REPLACE EACH ONE, REPLACING JUST "consec" WILL NOT WORK!
-# Activation
+#Scoreboards: 1) dummy: consecration, consecTimer, consecCdUI, consecTimerEnd, perSec, consecCycle, consecrated, consecrated1
+#             2) dropped.minecraft.purple_dye: purpleDrop
+#Set scoreboard values: perSec 20, consecration 0, consecTimer 0
+
 execute as @a[team=paladin,scores={consecration=0},nbt={SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 1
 execute as @a[team=paladin,scores={purpleDrop=1,consecration=1,consecTimer=0}] run scoreboard players set @s consecTimer 1
 kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}}}]
-
 execute as @a[scores={consecTimer=2}] at @s as @e[distance=..7] unless score @s consecTimer matches 2 run tag @s add consecrated
 execute as @e[tag=consecrated] run scoreboard players add @s consecrated 1
-execute as @e[scores={consecrated=1..9}] run effect give @s levitation 1 2 true
+#either this line:
+execute as @e[scores={consecrated=1..7}] run effect give @s levitation 1 3 true
+#################################################################################
 execute as @e[scores={consecrated=30}] run effect give @s levitation 1 128 true
 execute as @e[scores={consecrated=31}] run effect clear @s levitation
-execute as @e[scores={consecrated=31}] run tag @s remove consecrated
-execute as @e[scores={consecrated=31}] run scoreboard players set @s consecrated 0
-
+#or this line:
+execute as @e[scores={consecrated=1..31}] at @s run tp @s ~ ~0.15 ~
+##################################################################
+execute as @e[scores={consecrated=1..7}] run effect give @s minecraft:slowness 1 127 true
+execute as @e[scores={consecrated=1..},tag=!consecrated1] at @s run particle minecraft:enchant ~ ~1 ~ 0.3 1 0.3 0.1 10 normal
+execute as @e[scores={consecrated=1}] at @s run playsound minecraft:entity.wither.death master @a ~ ~ ~ 1 2 1
+execute as @e[scores={consecrated=30}] at @s run playsound minecraft:entity.generic.explode master @a ~ ~ ~ 4 0.5 1
+execute as @e[scores={consecrated=31}] at @s run playsound minecraft:entity.ghast.shoot master @a ~ ~ ~ 10 0.5 1
+execute as @e[scores={consecrated=31..100},tag=!consecrated1] at @s unless block ~ ~-1 ~ air run tag @s add consecrated1
+scoreboard players add @a[tag=consecrated1] consecrated1 1
+effect give @a[scores={consecrated1=5}] minecraft:instant_damage 1 0 true
+tag @a[scores={consecrated1=70}] remove consecrated1
+scoreboard players set @a[scores={consecrated1=70}] consecrated1 0
+execute as @a[scores={consecrated1=5}] at @s run particle minecraft:flame ~ ~0.1 ~ 2 0 2 0.01 100
+execute as @a[scores={consecrated1=5}] at @s run particle minecraft:cloud ~ ~0.1 ~ 2 0 2 0.01 10
+execute as @a[scores={consecrated1=5}] at @s run particle minecraft:lava ~ ~0.1 ~ 0.5 0 0.5 0.01 10
+execute as @e[scores={consecrated=100}] run tag @s remove consecrated
+execute as @e[scores={consecrated=100}] run scoreboard players set @s consecrated 0
 execute as @a[scores={consecTimer=0,consecCycle=1..}] run scoreboard players set @s consecCycle 0
 scoreboard players add @a[scores={consecTimer=1..}] consecTimer 1
-
-scoreboard players set @a[scores={consecTimer=2}] consecCdUI 60
+scoreboard players set @a[scores={consecTimer=2}] consecCdUI 10
 execute as @a[scores={consecTimer=2}] run scoreboard players operation @s consecTimerEnd = @s consecCdUI
 execute as @a[scores={consecTimer=2}] run scoreboard players operation @s consecTimerEnd *= @s perSec
-
 execute as @a[scores={consecTimer=1..}] at @s run title @s[nbt={SelectedItemSlot:5}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"score":{"name":"@p","objective":"consecCdUI"},"color":"dark_purple","bold":"true"}]
-
 execute as @a[scores={consecTimer=1..}] run scoreboard players add @s consecCycle 1
 execute as @a[scores={consecCycle=20}] run scoreboard players remove @s consecCdUI 1
 execute as @a[scores={consecCycle=20}] run scoreboard players set @s consecCycle 0
-
-# End
 execute as @a[team=paladin,scores={consecration=1},nbt=!{SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 0
 execute as @a[scores={consecTimer=2..}] if score @s consecTimer = @s consecTimerEnd run replaceitem entity @s hotbar.5 minecraft:purple_dye{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}} 1
 scoreboard players set @a[scores={purpleDrop=1..}] purpleDrop 0
