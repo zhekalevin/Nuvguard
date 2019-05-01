@@ -13,19 +13,25 @@ execute as @a[scores={dtossTimer=2}] run replaceitem entity @s armor.feet minecr
 execute at @a[scores={dtossTimer=2}] run summon creeper ~ ~ ~ {CustomNameVisible:0b,ExplosionRadius:1b,Fuse:0,CustomName:"{\"text\":\"Dwarven Take-off\"}"}
 execute at @a[scores={dtossTimer=5}] run particle minecraft:explosion ~ ~ ~ 2 0 2 0.05 500
 
-execute as @a[tag=!notintheair,scores={dtossTimer=6..100,dtoss1=0}] at @s unless block ~ ~-0.1 ~ air run tag @s add notintheair
-scoreboard players add @a[scores={dtossTimer=6..100}] dtoss1 1
+
+execute as @a[tag=!notoss,tag=!notintheair,scores={dtossTimer=6..100}] at @s unless block ~ ~-0.1 ~ air run tag @s add notintheair
+tag @a[tag=notintheair] add notoss
 effect give @a[tag=notintheair] minecraft:resistance 1 127 true
+execute as @a[tag=notintheair] at @s run effect give @a[distance=..5] minecraft:resistance 1 2 true
 execute as @a[tag=notintheair] at @s run tp @p ~ ~-0.5 ~
-execute as @a[tag=notintheair,scores={dtoss1=..20}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:1b,Fuse:0,CustomName:"{\"text\":\"Dwarven Flop\"}"}
-execute as @a[tag=notintheair,scores={dtoss1=21..30}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:2b,Fuse:0,CustomName:"{\"text\":\"Dwarven Landing\"}"}
-execute as @a[tag=notintheair,scores={dtoss1=31..40}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:3b,Fuse:0,CustomName:"{\"text\":\"Dwarven Plunge\"}"}
-execute as @a[tag=notintheair,scores={dtoss1=41..100}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:4b,Fuse:0,CustomName:"{\"text\":\"The Legendary Airborne Dwarf\"}"}
-execute as @a[tag=notintheair,scores={dtoss1=41..100}] at @s run effect give @a[tag=!notintheair,distance=..10] minecraft:blindness 2 0 false
-effect clear @a[tag=notintheair] minecraft:resistance
-scoreboard players set @a[tag=notintheair,scores={dtoss1=100..}] dtoss1 0
-execute as @a[scores={dtoss1=0},tag=notintheair] run replaceitem entity @s armor.feet minecraft:diamond_boots 1
+execute as @a[tag=notintheair,scores={dtossTimer=..24}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:1b,Fuse:0,CustomName:"{\"text\":\"Dwarven Flop\"}"}
+execute as @a[tag=notintheair,scores={dtossTimer=25..34}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:2b,Fuse:0,CustomName:"{\"text\":\"Dwarven Landing\"}"}
+execute as @a[tag=notintheair,scores={dtossTimer=35..44}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:3b,Fuse:0,CustomName:"{\"text\":\"Dwarven Plunge\"}"}
+execute as @a[tag=notintheair,scores={dtossTimer=45..100}] at @s run summon creeper ~ ~0.5 ~ {CustomNameVisible:0b,ExplosionRadius:4b,Fuse:0,CustomName:"{\"text\":\"The Legendary Airborne Dwarf\"}"}
+execute as @a[tag=notintheair,scores={dtossTimer=45..100}] at @s run effect give @a[tag=!notintheair,distance=..7] minecraft:blindness 2 0 true
+execute as @a[tag=notintheair,scores={dtossTimer=45..100}] at @s run effect give @a[tag=!notintheair,distance=..7] minecraft:slowness 2 0 false
+execute as @a[tag=notintheair,scores={dtossTimer=45..100}] at @s run effect give @a[tag=!notintheair,distance=..7] minecraft:jump_boost 2 128 false
+execute as @a[tag=notintheair,scores={dtossTimer=45..100}] at @s at @a[tag=!notintheair,distance=..7] run particle minecraft:angry_villager ~ ~2 ~ 0.15 0.1 0.15 0 10
+execute as @a[tag=notintheair] at @s run effect clear @a[distance=..5] minecraft:resistance
 tag @a[tag=notintheair] remove notintheair
+tag @a[tag=notoss,scores={dtossTimer=0}] remove notoss
+
+
 
 #start timer
 execute as @a[scores={dtossTimer=0,dtossCycle=1..}] run scoreboard players set @s dtossCycle 0
