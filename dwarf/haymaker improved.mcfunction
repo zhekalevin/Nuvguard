@@ -1,9 +1,9 @@
 #Scoreboards: 1) dummy: haymaker, haymakerTimer, haymakerCdUI, haymakerTimerEnd, perSec, haymakerCycle
-#             2) dropped.minecraft.nether_star: netherDrop
+#             2) dropped.minecraft.nether_star: haymakerDrop
 #Set scoreboard values: perSec 20, haymaker 0, haymakerTimer 0
 
 execute as @a[team=dwarf,scores={haymaker=0},nbt={SelectedItem:{id:"minecraft:nether_star",Count:1b,tag:{display:{Name:"{\"text\":\"Haymaker\",\"color\":\"gold\",\"bold\":\"true\"}",Lore:["Equip to slot 7. Drop to activate"]}}},SelectedItemSlot:6}] run scoreboard players set @s haymaker 1
-execute as @a[team=dwarf,scores={netherDrop=1,haymaker=1,haymakerTimer=0}] run scoreboard players set @s haymakerTimer 1
+execute as @a[team=dwarf,scores={haymakerDrop=1,haymaker=1,haymakerTimer=0}] run scoreboard players set @s haymakerTimer 1
 kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:nether_star",Count:1b,tag:{display:{Name:"{\"text\":\"Haymaker\",\"color\":\"gold\",\"bold\":\"true\"}",Lore:["Equip to slot 7. Drop to activate"]}}}}]
 
 execute as @a[scores={haymakerTimer=2}] run replaceitem entity @s hotbar.6 minecraft:iron_axe{display:{Name:"{\"text\":\"Haymaker\",\"color\":\"white\",\"bold\":\"true\"}",Lore:["Good 'ole Putt"]},HideFlags:4,Unbreakable:1b,Enchantments:[{id:"minecraft:knockback",lvl:6}]} 1
@@ -27,5 +27,5 @@ execute as @a[scores={haymakerCycle=20}] run scoreboard players set @s haymakerC
 
 execute as @a[team=dwarf,scores={haymaker=1},nbt=!{SelectedItem:{id:"minecraft:nether_star",Count:1b,tag:{display:{Name:"{\"text\":\"Haymaker\",\"color\":\"gold\",\"bold\":\"true\"}",Lore:["Equip to slot 7. Drop to activate"]}}},SelectedItemSlot:6}] run scoreboard players set @s haymaker 0
 execute as @a[scores={haymakerTimer=2..}] if score @s haymakerTimer = @s haymakerTimerEnd run replaceitem entity @s hotbar.6 minecraft:nether_star{display:{Name:"{\"text\":\"Haymaker\",\"color\":\"gold\",\"bold\":\"true\"}",Lore:["Equip to slot 7. Drop to activate"]}} 1
-scoreboard players set @a[scores={netherDrop=1..}] netherDrop 0
+scoreboard players set @a[scores={haymakerDrop=1..}] haymakerDrop 0
 execute as @a[scores={haymakerTimer=2..}] if score @s haymakerTimer = @s haymakerTimerEnd run scoreboard players set @s haymakerTimer 0

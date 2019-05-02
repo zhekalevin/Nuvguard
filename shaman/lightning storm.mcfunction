@@ -1,9 +1,9 @@
 #Scoreboards: 1) dummy: storm, stormTimer, stormCycle
-#             2) dropped.minecraft.light_blue_dye: lightBlueDrop
+#             2) dropped.minecraft.light_blue_dye: stormDrop
 #Set scoreboard values: storm 0, stormTimer 0
 
 execute as @a[team=shaman,scores={storm=0},nbt={SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Lightning Storm\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}},SelectedItemSlot:4}] run scoreboard players set @s storm 1
-execute as @a[team=shaman,scores={lightBlueDrop=1,storm=1,stormTimer=0}] run scoreboard players set @s stormTimer 1
+execute as @a[team=shaman,scores={stormDrop=1,storm=1,stormTimer=0}] run scoreboard players set @s stormTimer 1
 kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Lightning Storm\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}}}]
 
 #start timer
@@ -19,5 +19,9 @@ execute as @a[scores={stormCycle=5}] run scoreboard players set @s stormCycle 0
 
 execute as @a[team=shaman,scores={storm=1},nbt=!{SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Lightning Storm\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}},SelectedItemSlot:4}] run scoreboard players set @s storm 0
 replaceitem entity @a[scores={stormTimer=150}] hotbar.4 minecraft:light_blue_dye{display:{Name:"{\"text\":\"Lightning Storm\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}} 1
-scoreboard players set @a[scores={lightBlueDrop=1..}] lightBlueDrop 0
+scoreboard players set @a[scores={stormDrop=1..}] stormDrop 0
 scoreboard players set @a[scores={stormTimer=150..}] stormTimer 0
+
+
+
+playsound minecraft:entity.ender_dragon.growl master @a ~ ~ ~ 10 0 1
