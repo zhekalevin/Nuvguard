@@ -1,11 +1,11 @@
-#Replace template with the ability name. Replace exampleTeam, exampleDrop, exampleSlot-1, exampleSlot, exampleInventoryName, exampleColor, exampleItem with specific names.
+#Replace template with the ability name. Replace exampleTeam, templateDrop, exampleSlot-1, exampleSlot, exampleInventoryName, exampleColor, exampleItem with specific names.
 
 #Reset and stop cycle after completion
 execute as @a[scores={templateTimer=0,templateCycle=1..}] run scoreboard players set @s templateCycle 0
 
 #Activation
 execute as @a[team=exampleTeam,scores={template=0},nbt={SelectedItem:{id:"minecraft:exampleItem",Count:1b,tag:{display:{Name:"{\"text\":\"exampleInventoryName\",\"color\":\"exampleColor\",\"bold\":\"true\"}",Lore:["Equip to slot exampleSlot. Drop to activate"]}}},SelectedItemSlot:exampleSlot-1}] run scoreboard players set @s template 1
-execute as @a[team=exampleTeam,scores={exampleDrop=1,template=1,templateTimer=0}] run scoreboard players set @s templateTimer 1
+execute as @a[team=exampleTeam,scores={templateDrop=1,template=1,templateTimer=0}] run scoreboard players set @s templateTimer 1
 kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:exampleItem",Count:1b,tag:{display:{Name:"{\"text\":\"exampleInventoryName\",\"color\":\"exampleColor\",\"bold\":\"true\"}",Lore:["Equip to slot exampleSlot. Drop to activate"]}}}}]
 
 #Start timer
@@ -39,7 +39,7 @@ execute as @a[scores={templateCycle=20}] run scoreboard players remove @s templa
 execute as @a[scores={templateCycle=20}] run scoreboard players set @s templateCycle 0
 
 #End
-scoreboard players set @a[team=exampleTeam,scores={exampleDrop=1..}] exampleDrop 0
+scoreboard players set @a[team=exampleTeam,scores={templateDrop=1..}] templateDrop 0
 execute as @a[team=exampleTeam,scores={template=1},nbt=!{SelectedItem:{id:"minecraft:exampleItem",Count:1b,tag:{display:{Name:"{\"text\":\"exampleInventoryName\",\"color\":\"exampleColor\",\"bold\":\"true\"}",Lore:["Equip to slot exampleSlot. Drop to activate"]}}},SelectedItemSlot:exampleSlot-1}] run scoreboard players set @s template 0
 execute as @a[scores={templateTimer=2..}] if score @s templateTimer = @s templateTimerEnd run replaceitem entity @s hotbar.exampleSlot-1 minecraft:exampleItem{display:{Name:"{\"text\":\"exampleInventoryName\",\"color\":\"exampleColor\",\"bold\":\"true\"}",Lore:["Equip to slot exampleSlot. Drop to activate"]}} 1
 execute as @a[scores={templateTimer=2..}] if score @s templateTimer = @s templateTimerEnd run scoreboard players set @s templateTimer 0
