@@ -2,9 +2,9 @@
 #             2) dropped.minecraft.purple_dye: consecDrop
 #Set scoreboard values: perSec 20, consecration 0, consecTimer 0
 
-execute as @a[team=paladin,scores={consecration=0},nbt={SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 1
+execute as @a[team=paladin,scores={consecration=0},nbt={SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 6. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 1
 execute as @a[team=paladin,scores={consecDrop=1,consecration=1,consecTimer=0}] run scoreboard players set @s consecTimer 1
-kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}}}]
+kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 6. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}}}]
 
 execute as @a[scores={consecTimer=2}] at @s as @e[distance=..7] unless score @s consecTimer matches 2 run tag @s add consecrated
 execute as @e[tag=consecrated] run scoreboard players add @s consecrated 1
@@ -41,7 +41,7 @@ execute as @a[scores={consecTimer=1..}] at @s run title @s[nbt={SelectedItemSlot
 execute as @a[scores={consecTimer=1..}] run scoreboard players add @s consecCycle 1
 execute as @a[scores={consecCycle=20}] run scoreboard players remove @s consecCdUI 1
 execute as @a[scores={consecCycle=20}] run scoreboard players set @s consecCycle 0
-execute as @a[team=paladin,scores={consecration=1},nbt=!{SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 0
-execute as @a[scores={consecTimer=2..}] if score @s consecTimer = @s consecTimerEnd run replaceitem entity @s hotbar.5 minecraft:purple_dye{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["Equip to slot 6. Drop to activate"]}} 1
+execute as @a[team=paladin,scores={consecration=1},nbt=!{SelectedItem:{id:"minecraft:purple_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 6. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:5}] run scoreboard players set @s consecration 0
+execute as @a[scores={consecTimer=2..}] if score @s consecTimer = @s consecTimerEnd run replaceitem entity @s hotbar.5 minecraft:purple_dye{display:{Name:"{\"text\":\"Consecration\",\"color\":\"dark_purple\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 6. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}} 1
 scoreboard players set @a[scores={consecDrop=1..}] consecDrop 0
 execute as @a[scores={consecTimer=2..}] if score @s consecTimer = @s consecTimerEnd run scoreboard players set @s consecTimer 0

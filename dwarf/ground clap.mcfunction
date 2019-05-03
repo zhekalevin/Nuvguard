@@ -1,10 +1,10 @@
 #Scoreboards: 1) dummy: clap, clapTimer, clapCdUI, clapTimerEnd, perSec, clapCycle
-#             2) dropped.minecraft.light_blue_dye: clapDrop
+#             2) dropped.minecraft:light_blue_dye: clapDrop
 #Set scoreboard values: perSec 20, clap 0, clapTimer 0
 
-execute as @a[team=dwarf,scores={clap=0},nbt={SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to Slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s clap 1
+execute as @a[team=dwarf,scores={clap=0},nbt={SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:4}] run scoreboard players set @s clap 1
 execute as @a[team=dwarf,scores={clapDrop=1,clap=1,clapTimer=0}] run scoreboard players set @s clapTimer 1
-kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to Slot 6. Drop to activate"]}}}}]
+kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}}}]
 
 
 execute as @a[scores={clapTimer=1}] run tag @s add clapper 
@@ -34,13 +34,13 @@ execute as @a[scores={clapTimer=2}] run scoreboard players operation @s clapTime
 execute as @a[scores={clapTimer=2}] run scoreboard players operation @s clapTimerEnd *= @s perSec
 
 #start cycle
-execute as @a[scores={clapTimer=1..}] at @s run title @s[nbt={SelectedItemSlot:5}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"score":{"name":"@p","objective":"clapCdUI"},"color":"aqua","bold":"true"}]
+execute as @a[scores={clapTimer=1..}] at @s run title @s[nbt={SelectedItemSlot:4}] actionbar [{"text":"Cooldown: ","color":"white","bold":"false"},{"score":{"name":"@p","objective":"clapCdUI"},"color":"aqua","bold":"true"}]
 
 execute as @a[scores={clapTimer=1..}] run scoreboard players add @s clapCycle 1
 execute as @a[scores={clapCycle=20}] run scoreboard players remove @s clapCdUI 1
 execute as @a[scores={clapCycle=20}] run scoreboard players set @s clapCycle 0
 
-execute as @a[team=dwarf,scores={clap=1},nbt=!{SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to Slot 6. Drop to activate"]}}},SelectedItemSlot:5}] run scoreboard players set @s clap 0
-execute as @a[scores={clapTimer=2..}] if score @s clapTimer = @s clapTimerEnd run replaceitem entity @s hotbar.5 minecraft:light_blue_dye{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to Slot 6. Drop to activate"]}} 1
+execute as @a[team=dwarf,scores={clap=1},nbt=!{SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:4}] run scoreboard players set @s clap 0
+execute as @a[scores={clapTimer=2..}] if score @s clapTimer = @s clapTimerEnd run replaceitem entity @s hotbar.4 minecraft:light_blue_dye{display:{Name:"{\"text\":\"Ground Clap\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}} 1
 scoreboard players set @a[scores={clapDrop=1..}] clapDrop 0
 execute as @a[scores={clapTimer=2..}] if score @s clapTimer = @s clapTimerEnd run scoreboard players set @s clapTimer 0

@@ -1,6 +1,6 @@
-#Scoreboards: 1) dummy: dtoss, dtossTimer, dtossCdUI, dtossTimerEnd, perSec, dtossCycle, dtoss1
-#             2) dropped.minecraft.purple_dye: dtossDrop
-#Set scoreboard values: perSec 20, dtoss 0, dtossTimer 0, dtoss1 0
+#Scoreboards: 1) dummy: dtoss, dtossTimer, dtossCdUI, dtossTimerEnd, perSec, dtossCycle
+#             2) dropped.minecraft:purple_dye: dtossDrop
+#Set scoreboard values: perSec 20, dtoss 0, dtossTimer 0
 
 
 

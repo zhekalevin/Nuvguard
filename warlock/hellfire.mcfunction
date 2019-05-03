@@ -1,8 +1,8 @@
 
 # Activation
-execute as @a[team=warlock,scores={hell=0},nbt={SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}},SelectedItemSlot:4}] run scoreboard players set @s hell 1
+execute as @a[team=warlock,scores={hell=0},nbt={SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:4}] run scoreboard players set @s hell 1
 execute as @a[team=warlock,scores={hell=1,hell=1,hellTimer=0}] run scoreboard players set @s hellTimer 1
-kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}}}]
+kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}}}]
 
 # ability
 execute as @a[scores={hellTimer=2..100}] at @s if block ~-1 ~ ~2 air run summon minecraft:area_effect_cloud ~-1 ~ ~2 {Duration:40,Tags:["firemarker","firemarker1"]}
@@ -89,7 +89,7 @@ execute as @a[scores={hellCycle=20}] run scoreboard players remove @s hellCdUI 1
 execute as @a[scores={hellCycle=20}] run scoreboard players set @s hellCycle 0
 
 # End
-execute as @a[team=warlock,scores={hell=1},nbt=!{SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}}},SelectedItemSlot:4}] run scoreboard players set @s hell 0
-execute as @a[scores={hellTimer=2..}] if score @s hellTimer = @s hellTimerEnd run replaceitem entity @s hotbar.4 minecraft:light_blue_dye{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["Equip to slot 5. Drop to activate"]}} 1
+execute as @a[team=warlock,scores={hell=1},nbt=!{SelectedItem:{id:"minecraft:light_blue_dye",Count:1b,tag:{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}}},SelectedItemSlot:4}] run scoreboard players set @s hell 0
+execute as @a[scores={hellTimer=2..}] if score @s hellTimer = @s hellTimerEnd run replaceitem entity @s hotbar.4 minecraft:light_blue_dye{display:{Name:"{\"text\":\"Hellfire\",\"color\":\"aqua\",\"bold\":\"true\"}",Lore:["{\"text\":\"Equip to slot 5. Drop to activate\",\"color\":\"white\",\"bold\":false,\"italic\":false}"]}} 1
 scoreboard players set @a[team=warlock,scores={hell=1..}] hell 0
 execute as @a[scores={hellTimer=2..}] if score @s hellTimer = @s hellTimerEnd run scoreboard players set @s hellTimer 0
