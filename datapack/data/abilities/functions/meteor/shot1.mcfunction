@@ -17,7 +17,7 @@ execute as @a[scores={meteor=1}] at @s run tp @e[tag=target,sort=nearest,limit=1
 
 execute as @a[scores={meteor=1}] at @s run tp @e[tag=target,sort=nearest,limit=1] ~ ~1.62 ~
 
-execute as @e[tag=target] at @s run function give:shot/shot2
+execute as @e[tag=target] at @s run function abilities:meteor/shot2
 
 scoreboard players reset @e[tag=target] raycasting
 
@@ -27,13 +27,13 @@ kill @e[scores={flameMarker=15}]
 
 execute as @e[tag=aim,scores={flameMarker=1}] at @s run summon minecraft:armor_stand ~ ~ ~ {Tags:["target1"],Marker:1b,NoGravity:1b,Invisible:1b}
 
-execute as @a[scores={meteorSelect=1}] as @e[tag=target1] at @s run function give:shot/shot3
+execute as @a[scores={meteorSelect=1}] as @e[tag=target1] at @s run function abilities:meteor/shot3
 
 kill @e[tag=target1]
 
 execute as @e[tag=aim] at @s rotated ~180 ~ facing entity @e[scores={meteorTimer=1}] feet run summon minecraft:armor_stand ~ ~ ~ {Tags:["target1"],Marker:1b,NoGravity:1b,Invisible:1b}
 
-execute as @e[tag=target1] run function give:shot/shot4
+execute as @e[tag=target1] run function abilities:meteor/shot4
 
 kill @e[tag=target1]
 

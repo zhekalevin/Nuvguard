@@ -32,4 +32,4 @@ execute as @s[scores={particlePos=..4}] at @s positioned ~ ~0.4 ~ run particle m
 
 execute as @s at @s run tp @s ~ ~ ~ ~5 ~
 
-execute if entity @s[scores={particlePos=..72}] run function give:shot/shot4
+execute if entity @s[scores={particlePos=..72}] run function abilities:meteor/shot4

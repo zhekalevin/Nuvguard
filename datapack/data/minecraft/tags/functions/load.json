@@ -1,5 +1,6 @@
 {
     "values": [
-        "give:shot/scoreboards"
+        "abilities:meteor/scoreboards",
+        "abilities:spear/scoreboards"
     ]
 }

@@ -1,5 +1,6 @@
 {
     "values": [
-        "give:shot/shot1"
+        "abilities:meteor/shot1",
+        "abilities:spear/main"
     ]
 }
